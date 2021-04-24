@@ -10,7 +10,7 @@ export interface IFigure {
   [key: string]: number | string;
 }
 
-const SOCKET_URL = "ws://paint-online-server.vercel.app:3001/";
+const SOCKET_URL = "ws://localhost:3001/";
 
 const socket = new WebSocket(SOCKET_URL);
 
