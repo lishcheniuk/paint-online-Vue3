@@ -20,6 +20,7 @@ function brush(canvas: any, sessionId: string) {
     if (isDown) {
       const currentX = e.pageX - e.target.offsetLeft;
       const currentY = e.pageY - e.target.offsetTop;
+
       ctx.lineTo(currentX, currentY);
       ctx.stroke();
       // sendMessage({
@@ -38,13 +39,13 @@ function brush(canvas: any, sessionId: string) {
   function mouseUpHandler() {
     isDown = false;
 
-    sendMessage({
-      method: "draw",
-      sessionId,
-      figure: {
-        type: "finish"
-      }
-    });
+    // sendMessage({
+    //   method: "draw",
+    //   sessionId,
+    //   figure: {
+    //     type: "finish"
+    //   }
+    // });
   }
 }
 
