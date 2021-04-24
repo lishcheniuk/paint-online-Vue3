@@ -88,7 +88,9 @@ export default {
     async loadFile({ state }: any, id: string) {
       const ctx = state._canvas.getContext("2d");
       try {
-        const res = await fetch(`http://localhost:3000/image/?id=${id}`);
+        const res = await fetch(
+          `https://paint-online-server.vercel.app/image/?id=${id}`
+        );
 
         const imgUrl = await res.json();
         const img = new Image();
@@ -103,7 +105,7 @@ export default {
     },
     async saveCanvas({ state }: any, id: string) {
       try {
-        fetch(`http://localhost:3000/image/?id=${id}`, {
+        fetch(`https://paint-online-server.vercel.app/image/?id=${id}`, {
           method: "POST",
           body: JSON.stringify({ imageUrl: state._canvas.toDataURL() }),
           headers: { "Content-Type": "application/json" }

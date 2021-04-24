@@ -10,6 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (_req, res) => {
+  res.send("It is work!");
+});
+
 app.get("/image", (req, res) => {
   try {
     const file = fs.readFileSync(
