@@ -89,7 +89,7 @@ export default {
       const ctx = state._canvas.getContext("2d");
       try {
         const res = await fetch(
-          `https://paint-online-server.vercel.app/image/?id=${id}`
+          `${process.env.VUE_APP_BASE_URL}/image/?id=${id}`
         );
 
         const imgUrl = await res.json();
@@ -105,7 +105,7 @@ export default {
     },
     async saveCanvas({ state }: any, id: string) {
       try {
-        fetch(`https://paint-online-server.vercel.app/image/?id=${id}`, {
+        fetch(`${process.env.VUE_APP_BASE_URL}/image/?id=${id}`, {
           method: "POST",
           body: JSON.stringify({ imageUrl: state._canvas.toDataURL() }),
           headers: { "Content-Type": "application/json" }

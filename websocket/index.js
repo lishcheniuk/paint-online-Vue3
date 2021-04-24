@@ -1,6 +1,8 @@
 const WebSocketServer = require("ws");
+const http = require("http");
 
-const wss = new WebSocketServer.Server({ port: 3001 });
+const server = http.createServer();
+const wss = new WebSocketServer.Server({ server });
 
 wss.on("connection", function (ws) {
   ws.on("message", (msg) => {
@@ -34,3 +36,5 @@ function broadcastConnection(msg) {
     }
   });
 }
+
+server.listen(process.env.PORT || 8000);
