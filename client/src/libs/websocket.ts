@@ -15,7 +15,7 @@ const SOCKET_URL = process.env.VUE_APP_WS_URL;
 const socket = new WebSocket(SOCKET_URL);
 
 export function sendMessage(message: IMessageSocket) {
-  socket.send(JSON.stringify(message));
+  //socket.send(JSON.stringify(message));
 }
 
 export function subscribeMessage(callback: (msg: IMessageSocket) => void) {

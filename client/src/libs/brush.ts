@@ -39,13 +39,13 @@ function brush(canvas: any, sessionId: string) {
   function mouseUpHandler() {
     isDown = false;
 
-    // sendMessage({
-    //   method: "draw",
-    //   sessionId,
-    //   figure: {
-    //     type: "finish"
-    //   }
-    // });
+    sendMessage({
+      method: "draw",
+      sessionId,
+      figure: {
+        type: "finish"
+      }
+    });
   }
 }
 
