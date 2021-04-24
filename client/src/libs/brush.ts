@@ -20,17 +20,19 @@ function brush(canvas: any, sessionId: string) {
     if (isDown) {
       const currentX = e.pageX - e.target.offsetLeft;
       const currentY = e.pageY - e.target.offsetTop;
-      sendMessage({
-        method: "draw",
-        sessionId,
-        figure: {
-          type: "brush",
-          x: currentX,
-          y: currentY,
-          color: ctx.strokeStyle,
-          lineWidth: ctx.lineWidth
-        }
-      });
+      ctx.lineTo(currentX, currentY);
+      ctx.stroke();
+      // sendMessage({
+      //   method: "draw",
+      //   sessionId,
+      //   figure: {
+      //     type: "brush",
+      //     x: currentX,
+      //     y: currentY,
+      //     color: ctx.strokeStyle,
+      //     lineWidth: ctx.lineWidth
+      //   }
+      // });
     }
   }
   function mouseUpHandler() {
