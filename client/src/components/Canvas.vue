@@ -79,10 +79,10 @@ export default defineComponent({
           line.draw(ctx, figure);
           break;
         case "circle":
-          circle.draw();
+          circle.draw(ctx, figure);
           break;
         case "eraser":
-          eraser.draw();
+          eraser.draw(ctx, figure);
           break;
         case "finish":
           ctx.beginPath();

@@ -23,17 +23,18 @@ function brush(canvas: any, sessionId: string) {
 
       ctx.lineTo(currentX, currentY);
       ctx.stroke();
-      // sendMessage({
-      //   method: "draw",
-      //   sessionId,
-      //   figure: {
-      //     type: "brush",
-      //     x: currentX,
-      //     y: currentY,
-      //     color: ctx.strokeStyle,
-      //     lineWidth: ctx.lineWidth
-      //   }
-      // });
+
+      sendMessage({
+        method: "draw",
+        sessionId,
+        figure: {
+          type: "brush",
+          x: currentX,
+          y: currentY,
+          color: ctx.strokeStyle,
+          lineWidth: ctx.lineWidth
+        }
+      });
     }
   }
   function mouseUpHandler() {

@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "./Home.vue";
+import Paint from "./Paint.vue";
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      name: "home",
+      name: "paint",
       path: "/:id",
-      component: Home
+      component: Paint
     },
     {
       path: "/:pathMatch(.*)",
       redirect: (_to) => {
         return {
-          name: "home",
+          name: "paint",
           params: { id: `f${Date.now().toString(16)}` }
         };
       }

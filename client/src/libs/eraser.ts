@@ -1,3 +1,5 @@
+import { IFigure, sendMessage } from "./websocket";
+
 function eraser(canvas: any, sessionId: string) {
   const ctx = canvas.getContext("2d");
   let isDown = false;
@@ -11,7 +13,7 @@ function eraser(canvas: any, sessionId: string) {
     isDown = true;
     const startX = e.pageX - e.target.offsetLeft;
     const startY = e.pageY - e.target.offsetTop;
-
+    ctx.strokeStyle = "white";
     ctx.beginPath();
     ctx.moveTo(startX, startY);
   }
@@ -20,18 +22,43 @@ function eraser(canvas: any, sessionId: string) {
     if (isDown) {
       const currentX = e.pageX - e.target.offsetLeft;
       const currentY = e.pageY - e.target.offsetTop;
-      ctx.strokeStyle = "white";
+
       ctx.lineTo(currentX, currentY);
       ctx.stroke();
+
+      sendMessage({
+        method: "draw",
+        sessionId,
+        figure: {
+          type: "eraser",
+          x: currentX,
+          y: currentY,
+          color: ctx.strokeStyle,
+          lineWidth: ctx.lineWidth
+        }
+      });
     }
   }
 
   function mouseUpHandler() {
     isDown = false;
     ctx.strokeStyle = currentStrokeStyle;
+    sendMessage({
+      method: "draw",
+      sessionId,
+      figure: {
+        type: "finish"
+      }
+    });
   }
 }
 
-eraser.draw = () => {};
+eraser.draw = (ctx: any, options: IFigure) => {
+  const { x, y, color, lineWidth } = options;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.lineTo(x, y);
+  ctx.stroke();
+};
 
 export default eraser;

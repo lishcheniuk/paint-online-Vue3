@@ -15,7 +15,7 @@ import SettingBar from "./components/SettingBar.vue";
 import Modal from "./components/Modal.vue";
 
 export default defineComponent({
-  name: "Home",
+  name: "Paint",
   components: { Canvas, Toolbar, SettingBar, Modal }
 });
 </script>

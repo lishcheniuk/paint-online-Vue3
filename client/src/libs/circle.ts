@@ -1,9 +1,9 @@
+import { IFigure, sendMessage } from "./websocket";
+
 function circle(canvas: any, sessionId: string) {
   const ctx = canvas.getContext("2d");
   let isDown = false;
-  let canvasUrl: string;
-  let startX: number;
-  let startY: number;
+  let canvasUrl: string, startX: number, startY: number, r: number;
 
   canvas.onmousedown = mouseDownHandler;
   canvas.onmouseup = mouseUpHandler;
@@ -25,7 +25,7 @@ function circle(canvas: any, sessionId: string) {
 
       let width = currentX - startX;
       let height = currentY - startY;
-      let r = Math.sqrt(width ** 2 + height ** 2);
+      r = Math.sqrt(width ** 2 + height ** 2);
 
       const img = new Image();
       img.src = canvasUrl;
@@ -42,9 +42,29 @@ function circle(canvas: any, sessionId: string) {
 
   function mouseUpHandler() {
     isDown = false;
+    sendMessage({
+      method: "draw",
+      sessionId,
+      figure: {
+        type: "circle",
+        startX,
+        startY,
+        r,
+        color: ctx.fillStyle
+      }
+    });
   }
 }
 
-circle.draw = () => {};
+circle.draw = (ctx: any, options: IFigure) => {
+  const { startX, startY, r, color } = options;
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.strokeStyle = color;
+  ctx.arc(startX, startY, r, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+};
 
 export default circle;
